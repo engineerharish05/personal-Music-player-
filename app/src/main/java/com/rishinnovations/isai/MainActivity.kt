@@ -127,9 +127,10 @@ private fun ISAIHome(getController: () -> MediaController?, scanLibrary: () -> L
         if (granted) tracks = scanLibrary()
         else message = "Audio permission is needed to scan local music."
     }
+    val context = androidx.compose.ui.platform.LocalContext.current
     LaunchedEffect(Unit) {
         permissionGranted = ContextCompat.checkSelfPermission(
-            androidx.compose.ui.platform.LocalContext.current, permission
+            context, permission
         ) == PackageManager.PERMISSION_GRANTED
         if (permissionGranted) tracks = scanLibrary()
     }
